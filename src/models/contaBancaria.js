@@ -18,6 +18,11 @@ var contaBancariaSchema = new Schema(
       maxLenght: 20,
       required: true,
     },
+    apelido: {
+      type: String,
+      maxlength: 30,
+      required: true,
+    },
   },
   { timeStamps: true }
 );

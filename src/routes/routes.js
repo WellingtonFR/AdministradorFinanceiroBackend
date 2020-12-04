@@ -7,5 +7,6 @@ const contaBancariaController = require("../controllers/contaBancariaController"
 
 //Routes book
 route.get("/ContaBancaria", contaBancariaController.index);
+route.post("/ContaBancaria", contaBancariaController.create);
 
 module.exports = route;
