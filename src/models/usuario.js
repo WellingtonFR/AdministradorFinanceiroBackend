@@ -3,9 +3,14 @@ var Schema = mongoose.Schema;
 
 var usuarioSchema = new Schema(
   {
-    nome: {
+    nomeUsuario: {
       type: String,
       maxLenght: 100,
+      required: true,
+    },
+    dataDeNascimento: {
+      type: String,
+      maxLenght: 10,
       required: true,
     },
     email: {
@@ -15,11 +20,12 @@ var usuarioSchema = new Schema(
     },
     senha: {
       type: String,
-      maxLenght: 20,
+      maxlength: 64,
       required: true,
+      select: false,
     },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Usuario", usuarioSchema);

@@ -23,8 +23,13 @@ var contaBancariaSchema = new Schema(
       maxlength: 30,
       required: true,
     },
+    idUsuario: {
+      type: String,
+      maxlength: 64,
+      required: true,
+    },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("ContaBancaria", contaBancariaSchema);

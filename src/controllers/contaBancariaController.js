@@ -1,14 +1,12 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const { create } = require("../models/contaBancaria");
 const contaBancariaSchema = require("../models/contaBancaria");
 const ContaBancaria = mongoose.model("ContaBancaria");
 const validation = require("../validations/contaBancariaValidationSchema");
-//const validation = require("../validations/livroValidation");
 
 module.exports = {
   async index(req, res) {
-    await ContaBancaria.find()
+    await ContaBancaria.find({ idUsuario: req.userId })
       .then((dados) => {
         if (dados.length === 0) {
           return res.status(200).send({ message: "Nâo há conta registrada" });
@@ -24,22 +22,24 @@ module.exports = {
   async create(req, res) {
     const { banco, agencia, conta, apelido } = req.body;
 
-    const validationErrors = await validation.contaBancariaSchema.validate({
-      banco: banco,
-      agencia: agencia,
-      conta: conta,
-      apelido: apelido,
-    });
+    const validationErrors = await validation.contaBancariaValidationSchema.validateAsync(
+      {
+        banco: banco,
+        agencia: agencia,
+        conta: conta,
+        apelido: apelido,
+      }
+    );
     if (validationErrors.error) {
       return res.status(422).send({ message: validationErrors.error.message });
     }
 
-    const contaExistente = await ContaBancaria.find({
+    const contaExistente = await ContaBancaria.findOne({
       agencia: agencia,
       conta: conta,
     });
 
-    if (contaExistente.length != 0) {
+    if (contaExistente) {
       return res.status(400).send({ message: "Essa conta já está cadastrada" });
     }
 
@@ -48,6 +48,7 @@ module.exports = {
       agencia: agencia,
       conta: conta,
       apelido: apelido,
+      idUsuario: req.userId,
     });
 
     await novaConta
@@ -58,6 +59,7 @@ module.exports = {
           .send({ message: "Conta cadastrada com sucesso" });
       })
       .catch((err) => {
+        console.log(err);
         return res
           .status(400)
           .send({ message: "Ocorreu um erro ao cadastrar sua conta" });

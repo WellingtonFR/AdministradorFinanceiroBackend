@@ -14,12 +14,17 @@ var registroFinanceiroSchema = new Schema(
       required: true,
     },
     valor: {
+      type: Number,
+      maxLenght: 10,
+      required: true,
+    },
+    idUsuario: {
       type: String,
-      maxLenght: 20,
+      maxlength: 64,
       required: true,
     },
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("RegistroFinanceiro", registroFinanceiroSchema);

@@ -1,6 +1,6 @@
 const joi = require("joi");
 
-const contaBancariaSchema = joi.object({
+const contaBancariaValidationSchema = joi.object({
   banco: joi.string().max(4).required().messages({
     "string.base": "O campo banco está em formato inválido",
     "string.max": "O campo banco deve ter no máximo 4 caracteres",
@@ -27,4 +27,4 @@ const contaBancariaSchema = joi.object({
   }),
 });
 
-module.exports = { contaBancariaSchema };
+module.exports = { contaBancariaValidationSchema };

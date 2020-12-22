@@ -1,3 +1,4 @@
 {
-  "dbStringConnection": "mongodb+srv://WellingtonFR:jEic0eya3oDfva1B@cluster0.mkdnh.mongodb.net/administradorfinanceiro?retryWrites=true&w=majority"
+  "dbStringConnection": "mongodb+srv://WellingtonFR:jEic0eya3oDfva1B@cluster0.mkdnh.mongodb.net/administradorfinanceiro?retryWrites=true&w=majority",
+  "JWTTokenLocal": "2ictcz3lz8qvfzeo9rn6"
 }
